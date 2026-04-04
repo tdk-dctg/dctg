@@ -1,2 +1,2 @@
 # ngh-ch-ng-m
-phá đồ
+đây là nơi để thằng bố m phá đồ 
