@@ -2,12 +2,12 @@
 
 ## 👥 Thành viên nhóm
 
-| Ký hiệu | Họ tên | Vai trò chính (xoay vòng) |
-|----------|--------|---------------------------|
-| **Đăng** | [Họ tên đầy đủ] | Server Core & Database |
+| Ký hiệu | Họ tên | Mã SV| Vai trò chính (xoay vòng) |
+|----------|--------|-----|---------------------------|
+| **Đăng** | Tiến Đăng  | Server Core & Database |
 | **Quốc Minh** | [Họ tên đầy đủ] | Networking & Protocol |
 | **Công Minh** | [Họ tên đầy đủ] | Client GUI (JavaFX) |
-| **Khoa** | [Họ tên đầy đủ] | Business Logic & Testing |
+| **Khoa** | Trần Đăng Khoa | Business Logic & Testing |
 
 > [!IMPORTANT]
 > **Vai trò chính ≠ Chỉ làm phần đó.** Mỗi người có trách nhiệm **hiểu toàn bộ hệ thống**. Vai trò chính chỉ xác định ai là người **chịu trách nhiệm code đầu tiên** cho phần đó. Các tuần sau, mọi người sẽ review chéo và làm task ở phần khác để đảm bảo hiểu hết.
