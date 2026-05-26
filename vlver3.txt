@@ -1,0 +1,57 @@
+Dưới đây là kết quả kiểm tra tự động các lệnh của hệ thống BidHub:
+
+1. PING: PASS
+2.REGISTER thành công: PASS
+3.REGISTER trùng username: PASS
+4.REGISTER password ngắn: PASS
+5.REGISTER email sai: PASS
+6.REGISTER role ADMIN: PASS
+7LOGIN thành công: PASS
+LOGIN sai mật khẩu: PASS
+LOGIN username không tồn tại: PASS
+LOGIN thiếu password: PASS
+CREATE_ITEM thành công: PASS
+CREATE_ITEM thiếu tên: PASS
+CREATE_ITEM giá <= 0: PASS
+CREATE_ITEM sai loại: PASS
+CREATE_ITEM không có quyền (BIDDER): PASS
+GET_ITEM_LIST: PASS
+GET_ITEM_DETAIL: FAIL
+DELETE_ITEM: PASS
+DELETE_ITEM không tồn tại: PASS
+CREATE_AUCTION: FAIL
+PLACE_BID thành công: FAIL
+PLACE_BID giá thấp hơn current: PASS
+PLACE_BID auction không tồn tại: PASS
+GET_AUCTION_DETAIL: FAIL
+GET_AUCTION_LIST: PASS
+Tạo tài khoản ADMIN (nếu chưa có) và login: FAIL
+GET_USER_LIST: FAIL
+LOCK_USER: FAIL
+UNLOCK_USER: FAIL
+LOCK_USER không có quyền: PASS
+GET_AUCTION_REPORT: FAIL
+GET_BID_HISTORY_REPORT: FAIL
+GET_AUDIT_LOG: FAIL
+RUN_INTEGRITY_CHECK: FAIL
+Gọi PLACE_BID không có token: PASS
+Token giả: PASS
+JSON không hợp lệ: PASS
+Lệnh không xác định: PASS
+HEALTH_CHECK: FAIL
+
+
+
+17. GET_ITEM_DETAIL: Lỗi parse JSON từ phía server. Server xuất hiện lỗi Serialization error: Java 8 date/time type java.time.LocalDateTime not supported by default do thiếu đăng ký module jackson-datatype-jsr310 vào ObjectMapper.
+20. CREATE_AUCTION: Nhận lỗi "San pham khong ton tai". Lý do là $ITEM_ID dùng để tạo Auction đã bị xóa thành công ở lệnh test số 18, nên hệ thống không tìm thấy item.
+21. PLACE_BID thành công: Nhận lỗi "auctionId khong duoc de trong". Do lệnh 20 bị lỗi nên biến $AUCTION_ID không được khởi tạo để sử dụng cho lệnh này.
+24. GET_AUCTION_DETAIL: Tương tự lệnh 21, thiếu giá trị $AUCTION_ID.
+26. Tạo tài khoản ADMIN (nếu chưa có) và login: Lỗi đăng nhập sai thông tin. API đăng ký không cho phép tạo role ADMIN (như đã thấy ở test 6) và có vẻ như DB chưa được khởi tạo sẵn một tài khoản Admin mặc định nào mà tôi có thể dùng.
+27. GET_USER_LIST: Lỗi "Ban chua dang nhap". Do bước 26 thất bại, lệnh không có biến $ADMIN_TOKEN để thực thi.
+28. LOCK_USER: Lỗi "Ban chua dang nhap" (Thiếu token Admin).
+29. UNLOCK_USER: Lỗi "Ban chua dang nhap" (Thiếu token Admin).
+31. GET_AUCTION_REPORT: Lỗi "Ban chua dang nhap" (Thiếu token Admin).
+32. GET_BID_HISTORY_REPORT: Lỗi "Ban chua dang nhap" (Thiếu token Admin).
+33. GET_AUDIT_LOG: Lỗi "Ban chua dang nhap" (Thiếu token Admin).
+34. RUN_INTEGRITY_CHECK: Lỗi "Ban chua dang nhap" (Thiếu token Admin).
+39. HEALTH_CHECK: Lỗi từ server trả về "Lệnh không xác định: HEALTH_CHECK". Hiện tại phía RequestHandler của server chưa map/implement định dạng type này.
